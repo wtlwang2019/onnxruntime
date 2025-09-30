@@ -81,12 +81,8 @@ jobs:
               TYPE="-${{ matrix.config.tag }}"
           fi
           PREFIX="ghcr.io/${REPO_OWNER}/${REPO_NAME}:"
-          FULLTAGS="${PREFIX}full${TYPE},${PREFIX}full${TYPE}-${{ steps.srctag.outputs.name }}"
-          LIGHTTAGS="${PREFIX}light${TYPE},${PREFIX}light${TYPE}-${{ steps.srctag.outputs.name }}"
-          SERVERTAGS="${PREFIX}server${TYPE},${PREFIX}server${TYPE}-${{ steps.srctag.outputs.name }}"
+          FULLTAGS="${PREFIX}full${TYPE}"
           echo "full_output_tags=$FULLTAGS" >> $GITHUB_OUTPUT
-          echo "light_output_tags=$LIGHTTAGS" >> $GITHUB_OUTPUT
-          echo "server_output_tags=$SERVERTAGS" >> $GITHUB_OUTPUT
           echo "full_output_tags=$FULLTAGS"  # print out for debugging
         env:
           GITHUB_REPOSITORY_OWNER: '${{ github.repository_owner }}'
@@ -118,7 +114,6 @@ jobs:
           # tag list is generated from step above
           tags: ${{ steps.tag.outputs.full_output_tags }}
           file: ${{ matrix.config.dockerfile }}
-          target: full
           provenance: false
           build-args: |
             TARGETARCH=arm64          
