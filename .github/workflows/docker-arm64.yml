@@ -61,11 +61,11 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Determine source tag name
-        id: srctag
-        uses: ./.github/actions/get-tag-name
-        env:
-          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+      # - name: Determine source tag name
+      #   id: srctag
+      #   uses: ./.github/actions/get-tag-name
+      #   env:
+      #     BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
 
       - name: Determine image tag name
         id: tag
